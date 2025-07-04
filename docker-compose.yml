@@ -5,6 +5,7 @@ services:
       - "8000:80"
     volumes:
       - ./src:/var/www/html
+      - /var/www/html/vendor  # This now correctly preserves the vendor directory for the PHP service.
     depends_on:
       - db
 
@@ -15,7 +16,7 @@ services:
       POSTGRES_USER: auth_user
       POSTGRES_PASSWORD: auth_pass
     volumes:
-      - ./data:/docker-entrypoint-initdb.d
+      - ./data:/docker-entrypoint-initdb.d # This now correctly points to your local /data directory for the database.
 
   adminer:
     image: adminer
